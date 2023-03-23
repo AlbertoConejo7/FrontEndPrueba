@@ -1,0 +1,83 @@
+<div class='card'>
+  <div class='card-header'>
+    {{pageTitle}}
+  </div>
+  <div class='card-body'>
+    <div class='row'>
+      <div class='col-md-2'>Filter by:</div>
+      <div class='col-md-4'>
+        <input type='text'
+               [(ngModel)]='listFilter' />
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6'>
+        <h4>Filtered by: {{listFilter}}</h4>
+      </div>
+    </div>
+     
+
+
+    <div class='table-responsive'>
+      <table class='table'
+             *ngIf='facturas.length'>
+        <thead>
+          <tr>
+            
+            <th>Factura</th>
+            <th>Fecha</th>
+            <th>total</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let factura of filteredFacturas'>
+            
+            <td>
+              <a [routerLink]="['/facturas', factura.NUMERO_FACTURA]">
+                {{ factura.NUMERO_FACTURA }}
+              </a>
+            </td>
+            
+            
+            <td>{{ factura.FECHA | lowercase  }}</td>
+            <td>{{ factura.TOTAL | currency:'USD':'symbol':'1.2-2' }}</td>
+
+            
+            
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<form (submit)="onSubmit()">
+<div class='card'>
+  <div class='card-header'>
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Numero de Factura</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+    </div>
+    <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha</span>
+      </div>
+      <input  type="Date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+    </div>
+
+    
+  </div>
+</div>
+
+<button class='btn btn btn-success'
+style='width:220px'
+>
+<i class='fa fa-chevron-left'></i> Agregar Factura
+</button>
+
+</form>
